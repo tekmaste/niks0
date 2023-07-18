@@ -1,0 +1,47 @@
+{% extends "store/index.html" %}
+
+{% block content %}
+<main>
+    <div class="card">
+        <img src="{{ product.image.url }}" class="card-img-top" alt="Клавіатура">
+        <div class="card-body">
+            <h5 class="card-title">{{product.title}}</h5>
+            <p class="card-text">{{product.info}} </p>
+            <p class="card-text">ціна {{product.price}} грн</p>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Купити заарз
+            </button>
+
+        </div>
+    </div>
+
+</main>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/save_order">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="user_name" class="form-label">Ваше ім'я</label>
+                        <input type="text" class="form-control" id="user_name" name="user_name" required >
+                    </div>
+                    <div class="mb-3">
+                        <label for="user_phone" class="form-label">Ваш номер телефону</label>
+                        <input type="tel" class="form-control" id="user_phone" aria-describedby="emailHelp" name="user_phone" required>
+                        <div id="telHelp" class="form-text">Будь ласка, введіть діючий номер телефону</div>
+                    </div>
+                    <input type="hidden" name="product_id" value="{{product.id}}" readonly>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

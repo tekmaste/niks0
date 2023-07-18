@@ -1,0 +1,5 @@
+{% extends "store/index.html" %}
+{% block content %}
+<h1>Добрий день, {{order.name}}! Ваше замовлення на {{order.product.title}} за ціною {{ order.product.price}} грн в обробці</h1>
+
+{% endblock content %}
